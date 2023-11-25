@@ -30,3 +30,4 @@ jobs:
             # mandatory
             -Dsonar.projectKey=CAScompany_project-OrderService
             -Dsonar.organization=cascompany
+            -X
