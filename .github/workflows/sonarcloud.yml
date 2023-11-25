@@ -21,7 +21,7 @@ jobs:
             path: orders-service
 
       - name: Change to Project Directory
-        run: cd orders-service
+        run: cd ${{ github.workspace }}/orders-service
 
         
       - name: Build with Maven
