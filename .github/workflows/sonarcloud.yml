@@ -20,6 +20,14 @@ jobs:
         with:
           path: orders-service
 
+
+      - name: Print Working Directory
+        run: |
+            pwd
+            ls -R
+        working-directory: ./orders-service    
+
+      
       - name: Build with Maven
         run: mvn clean install -B -f orders-service/pom.xml
         working-directory: ./orders-service
