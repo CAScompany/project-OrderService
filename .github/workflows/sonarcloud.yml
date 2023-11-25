@@ -30,4 +30,5 @@ jobs:
             # mandatory
             -Dsonar.projectKey=CAScompany_project-OrderService
             -Dsonar.organization=cascompany
+            -Dsonar.java.binaries=target/classes
             -X
