@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2  # Add this line to checkout the repository
+      - name: Build with Maven
+        run: mvn clean install -B
 
       - name: List Compiled Classes
         run: ls -R target/classes
