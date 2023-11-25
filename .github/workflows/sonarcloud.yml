@@ -21,10 +21,12 @@ jobs:
           path: orders-service
 
       - name: Build with Maven
-        run: mvn clean install -B -f ./orders-service/pom.xml
+        run: mvn clean install -B -f orders-service/pom.xml
+        working-directory: ./orders-service
 
       - name: List Compiled Classes
-        run: ls -R ./orders-service/target/classes
+        run: ls -R target/classes
+        working-directory: ./orders-service
 
       - name: Analyze with SonarCloud
         uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
@@ -35,5 +37,5 @@ jobs:
           args:
             -Dsonar.projectKey=CAScompany_project-OrderService
             -Dsonar.organization=cascompany
-            -Dsonar.java.binaries=./orders-service/target/classes
+            -Dsonar.java.binaries=target/classes
             -X
