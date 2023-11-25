@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2  # Add this line to checkout the repository
+        with:
+            path: orders-service
 
       - name: Change to Project Directory
         run: cd orders-service
