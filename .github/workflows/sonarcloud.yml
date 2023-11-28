@@ -25,7 +25,7 @@ jobs:
       
       - name: Build with Maven
         run: mvn clean install -B -f orders-service/pom.xml
-        working-directory: ./orders-service
+        working-directory: ./orders-service/src
 
      
 
