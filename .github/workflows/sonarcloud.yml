@@ -37,7 +37,7 @@ jobs:
             -Dsonar.projectKey=CAScompany_project-OrderService
             -Dsonar.organization=cascompany
             -Dsonar.sources=src/main/java
-            -Dsonar.tests=orders-service/src/test/java
+            -Dsonar.tests=orders-service/src/test/java/uy/edu/ort/devops/ordersserviceexample
             -Dsonar.junit.reportsPath=orders-service/target/surefire-reports/
             -Dsonar.junit.reportsPath=orders-service/target/checkstyle-result.xml  
             -Dsonar.jacoco.reportPaths=orders-service/target/jacoco.exec
