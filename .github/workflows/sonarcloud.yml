@@ -37,20 +37,11 @@ jobs:
       - name: Analyze with SonarCloud
         uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args:
             -Dsonar.projectKey=CAScompany_project-OrderService
             -Dsonar.organization=cascompany
             -Dsonar.sources=src/main/java
- #           -Dsonar.tests=orders-service/src/test/java/uy/edu/ort/devops/ordersserviceexample
- #           -Dsonar.junit.reportsPath=orders-service/target/surefire-reports/
- #           -Dsonar.junit.reportsPath=orders-service/target/checkstyle-result.xml  
- #           -Dsonar.jacoco.reportPaths=orders-service/target/jacoco.exec
- #           -Dsonar.java.checkstyle.reportPath=orders-service/target/checkstyle-result.xml  
- #           -Dsonar.java.binaries=orders-service/src/test/java/uy/edu/ort/devops/ordersserviceexample
- #           -X
-
- #     - name: Maven test
- #       run: mvn install -B -f /home/runner/work/project-OrderService/project-OrderService/orders-service/pom.xml
+            -Dsonar.java.binaries=**/target/classes
