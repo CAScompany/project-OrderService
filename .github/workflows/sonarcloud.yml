@@ -38,7 +38,7 @@ jobs:
           find . -type f -name "pom.xml"
       
       - name: Maven test
-        run: mvn install -B 
+        run: mvn install -B -f /home/runner/work/project-OrderService/project-OrderService/orders-service/pom.xml
         
       - name: Analyze with SonarCloud
         uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
