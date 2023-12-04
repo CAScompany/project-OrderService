@@ -15,13 +15,13 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
         run:
-            working-directory: orders-service/
+            working-directory: orders-service
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
         with:
-          path: orders-service
+          path: orders-service/
 
       - name: Maven test 
         run: mvn install -B 
