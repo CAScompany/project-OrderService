@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
         run:
-            working-directory: project-OrderService
+            working-directory: orders-service
 
     steps:
       - name: Checkout Repository
