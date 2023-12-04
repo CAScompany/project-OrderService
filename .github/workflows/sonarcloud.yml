@@ -44,3 +44,4 @@ jobs:
             -Dsonar.projectKey=CAScompany_project-OrderService
             -Dsonar.organization=cascompany
             -Dsonar.java.binaries=**/target/classes
+            -Dsonar.sources=/src/main/java
