@@ -30,7 +30,7 @@ jobs:
           java-version: '11'   
 
       - name: List files in orders-service
-        run: ls /home/runner/work/project-OrderService/project-OrderService/orders-service
+        run: ls /home/runner/work/project-OrderService/project-OrderService/orders-service/main/java
        
       - name: Analyze with SonarCloud
         uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
