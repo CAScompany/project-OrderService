@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
         run:
-            working-directory: src/main/java
+            working-directory: project-Orders-service 
 
     steps:
       - name: Checkout Repository
