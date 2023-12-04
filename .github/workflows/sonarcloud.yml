@@ -29,7 +29,15 @@ jobs:
           distribution: 'temurin' 
           java-version: '11'   
 
-      - name: Maven test 
+      - name: List files in orders-service
+        run: ls orders-service
+
+      - name: Debug directory structure
+        run: | 
+          pwd
+          find . -type f -name "pom.xml"
+      
+      - name: Maven test
         run: mvn install -B 
         
       - name: Analyze with SonarCloud
