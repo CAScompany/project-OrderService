@@ -48,10 +48,12 @@ jobs:
             -Dsonar.jacoco.reportsPathtarjet/jacoco.exec
             -Dsonar.java.checkstyle.reportPath=target/checkstyle-result.xml
 
+
+
       - name: Levantar la app
         run: |
-          java -jar /target/order-service-example-0.0.1-SNAPSHOT.jar "test" "test" "test" &
-          sleep 5
+          mvn spring-boot:run -Dspring-boot.run.arguments="arg1 arg2 arg3"
+          sleep 400
 
       
 
