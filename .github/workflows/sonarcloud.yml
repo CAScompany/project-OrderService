@@ -53,8 +53,8 @@ jobs:
       - name: Levantar la app
         run: mvn spring-boot:run -Dspring-boot.run.arguments="arg1 arg2 arg3"
 
-      - name: Ejecutar pruebas con Newman
-        run: newman run path/to/your/collection.json
+      - name: Ejecutar pruebas de integración
+        run: mvn verify -Pintegration-tests
 
       
 
