@@ -48,10 +48,8 @@ jobs:
             -Dsonar.jacoco.reportsPathtarjet/jacoco.exec
             -Dsonar.java.checkstyle.reportPath=target/checkstyle-result.xml
 
-      - name: LS
-        run: ls -R
-#      - name: Start Spring Boot App
-#        run: java -jar target/orders-service-example.jar
+      - name: Start Spring Boot App
+        run: java -jar ./target/orders-service-example.jar
 
       - name: Wait for App to Start
         run: sleep 20  
