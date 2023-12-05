@@ -49,7 +49,7 @@ jobs:
             -Dsonar.java.checkstyle.reportPath=target/checkstyle-result.xml
 
       - name: Levantar la app
-        run: mvn spring-boot:run
+        run: mvn spring-boot:run "--paymentsServiceUrl=http://nueva-url-de-pagos --shippingServiceUrl=http://nueva-url-de-envio --productsServiceUrl=http://nueva-url-de-productos"
 
       - name: Wait for App to Start
         run: sleep 20  
