@@ -50,8 +50,8 @@ jobs:
          #  -Dsonar.java.binaries=target/test-classes/uy/edu/ort/devops/orderserviceexample/
       - name: find file
         run: |
-          ls - R
-          pwd
+          pwd && ls -R 
+          
       
       - name: Build JAR
         run: mvn install -B
