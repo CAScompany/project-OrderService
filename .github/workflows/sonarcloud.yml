@@ -48,10 +48,24 @@ jobs:
             -Dsonar.jacoco.reportsPathtarjet/jacoco.exec
             -Dsonar.java.checkstyle.reportPath=target/checkstyle-result.xml
 
-      #- name: find file
-      #  run: |
-      #    pwd && ls -R "/home/runner/work/project-OrderService/project-OrderService/orders-service"
-          
+      - name: Start Spring Boot App
+        run: java -jar target/orders-service-example.jar
+
+      - name: Wait for App to Start
+        run: sleep 20  
+
+      - name: Run Postman Tests
+        run: |
+          # Agrega comandos para ejecutar tus pruebas de Postman aquí
+
+      - name: Stop Spring Boot App
+        run: |
+          PID=$(ps aux | grep 'orders-service-example.jar' | grep -v grep | awk '{print $2}')
+          if [ -n "$PID" ]; then
+            echo "Stopping Spring Boot App with PID $PID"
+            kill -9 $PID
+          else
+            echo "Spring Boot App not running."
+          fi
       
-#      - name: Build JAR
-#        run: mvn install -B
+
