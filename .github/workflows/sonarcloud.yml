@@ -51,9 +51,7 @@ jobs:
 
 
       - name: Levantar la app
-        run: |
-          mvn spring-boot:run -Dspring-boot.run.arguments="arg1 arg2 arg3"
-          sleep 4000
+        run: mvn spring-boot:run -Dspring-boot.run.arguments="arg1 arg2 arg3"
       
       - name: Stop Spring Boot App
         run: |
