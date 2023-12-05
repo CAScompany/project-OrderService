@@ -52,17 +52,9 @@ jobs:
 
       - name: Levantar la app
         run: mvn spring-boot:run -Dspring-boot.run.arguments="arg1 arg2 arg3"
-        timeout-minutes: 1
-      
-      - name: Stop Spring Boot App
-        run: |
-          PID=$(ps aux | grep 'spring-boot:run' | grep -v grep | awk '{print $2}')
-          if [ -n "$PID" ]; then
-            echo "Stopping Spring Boot App with PID $PID"
-            kill -9 $PID
-          else
-            echo "Spring Boot App not running."
-          fi
+
+      - name: Ejecutar pruebas con Newman
+        run: newman run path/to/your/collection.json
 
       
 
