@@ -52,6 +52,7 @@ jobs:
 
       - name: Levantar la app
         run: mvn spring-boot:run -Dspring-boot.run.arguments="arg1 arg2 arg3"
+        timeout-minutes: 1
       
       - name: Stop Spring Boot App
         run: |
