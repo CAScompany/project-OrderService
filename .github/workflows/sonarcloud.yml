@@ -47,10 +47,10 @@ jobs:
             -Dsonar.junit.reportsPath=target/checckstyle-result.xml
             -Dsonar.jacoco.reportsPathtarjet/jacoco.exec
             -Dsonar.java.checkstyle.reportPath=target/checkstyle-result.xml
-         #  -Dsonar.java.binaries=target/test-classes/uy/edu/ort/devops/orderserviceexample/
-      - name: find file
-        run: |
-          pwd && ls -R "/home/runner/work/project-OrderService/project-OrderService/orders-service"
+            -Dsonar.java.binaries=target/classes
+      #- name: find file
+      #  run: |
+      #    pwd && ls -R "/home/runner/work/project-OrderService/project-OrderService/orders-service"
           
       
       - name: Build JAR
