@@ -48,8 +48,8 @@ jobs:
             -Dsonar.jacoco.reportsPathtarjet/jacoco.exec
             -Dsonar.java.checkstyle.reportPath=target/checkstyle-result.xml
 
-      - name: Start Spring Boot App
-        run: java -jar target/orders-service-example.jar
+      - name: Levantar la app
+        run: mvn spring-boot:run
 
       - name: Wait for App to Start
         run: sleep 20  
@@ -60,7 +60,7 @@ jobs:
 
       - name: Stop Spring Boot App
         run: |
-          PID=$(ps aux | grep 'orders-service-example.jar' | grep -v grep | awk '{print $2}')
+          PID=$(ps aux | grep 'spring-boot:run' | grep -v grep | awk '{print $2}')
           if [ -n "$PID" ]; then
             echo "Stopping Spring Boot App with PID $PID"
             kill -9 $PID
