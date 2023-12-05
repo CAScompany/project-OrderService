@@ -49,23 +49,9 @@ jobs:
             -Dsonar.java.checkstyle.reportPath=target/checkstyle-result.xml
 
       - name: Levantar la app
-        run: mvn spring-boot:run "--paymentsServiceUrl=http://nueva-url-de-pagos --shippingServiceUrl=http://nueva-url-de-envio --productsServiceUrl=http://nueva-url-de-productos"
-
-      - name: Wait for App to Start
-        run: sleep 20  
-
-      - name: Run Postman Tests
         run: |
-          # Agrega comandos para ejecutar tus pruebas de Postman aquí
+          java -jar $GITHUB_WORKSPACE/order-service/target/order-service-example-0.0.1-SNAPSHOT.jar &
+          sleep 5
 
-      - name: Stop Spring Boot App
-        run: |
-          PID=$(ps aux | grep 'spring-boot:run' | grep -v grep | awk '{print $2}')
-          if [ -n "$PID" ]; then
-            echo "Stopping Spring Boot App with PID $PID"
-            kill -9 $PID
-          else
-            echo "Spring Boot App not running."
-          fi
       
 
