@@ -8,18 +8,18 @@
     {
       "name": "Test Endpoint",
       "request": {
-        "method": "POST",
+        "method": "GET",
         "header": [],
         "body": {
           "mode": "raw",
           "raw": ""
         },
         "url": {
-          "raw": "http://localhost:8080/orders/50",
+          "raw": "http://localhost:8080/orders/",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8080",
-          "path": ["orders", "50"]
+          "path": ["orders"]
         }
       },
       "response": [],
