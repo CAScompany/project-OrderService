@@ -83,7 +83,7 @@ jobs:
           java-version: '11'
 
       - name: Correr App
-        run: mvn -X spring-boot:run -Dspring-boot.run.jvmArguments="-DVAR1=http://sitio:8080 -DVAR2=http://sitio:8080  -DVAR3=http://sitio:8080 " & sleep 4
+        run: mvn -X spring-boot:run -Dspring-boot.run.arguments="--APP_ARGS=http://172.17.0.2:8080 http://172.17.0.2:8080 http://172.17.0.2:8080" & sleep 4
   
       - name: Instalar Node.js y npm
         uses: actions/setup-node@v4
