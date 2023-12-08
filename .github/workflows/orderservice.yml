@@ -49,7 +49,7 @@ jobs:
             -Dsonar.junit.reportsPath=target/checckstyle-result.xml
             -Dsonar.jacoco.reportsPathtarjet/jacoco.exec
             -Dsonar.java.checkstyle.reportPath=target/checkstyle-result.xml
-
+            -Dsonar.exclusions=**/Dockerfile
       - name: Revisar archivos
         run:  tree
 
@@ -118,6 +118,7 @@ jobs:
 #             fi
   Release:
 #    needs:  FUNTIONAL_TESTING
+    needs: Analysis
     runs-on: ubuntu-latest
     defaults:
       run:
