@@ -64,7 +64,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ${{ env.CODE_DIR }}
+        working-directory: ./orders-service
     steps:
       - name: Code checkout 
         uses: actions/checkout@v4
