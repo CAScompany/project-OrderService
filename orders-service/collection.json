@@ -8,11 +8,16 @@
     {
       "name": "Test Endpoint",
       "request": {
-        "method": "GET",
-        "header": [],
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
         "body": {
           "mode": "raw",
-          "raw": ""
+          "raw": "[\"product1\", \"product2\"]"
         },
         "url": {
           "raw": "http://localhost:8080/orders/",
