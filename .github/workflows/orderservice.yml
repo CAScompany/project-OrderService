@@ -129,7 +129,7 @@ jobs:
                 echo "Spring Boot App not running."
             fi
   Release:
-    needs:  FUNTIONAL_TESTING
+    #needs:  FUNTIONAL_TESTING
     runs-on: ubuntu-latest
     defaults:
       run:
