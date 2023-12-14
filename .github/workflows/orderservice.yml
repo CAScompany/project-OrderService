@@ -1,18 +1,30 @@
-name: SonarCloud analysis
-
+name: Order-Service
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-  workflow_dispatch:
-env:
-    CODE_DIR: ./orders-service
-    ECR_REPOSITORY: proyecto-ort-repo
-    AWS_REGION: us-east-1
-    EKS_CLUSTER: project-ort-eks
-permissions:
-  pull-requests: read
+  workflow_call:
+    inputs:
+      CI_ENV:
+        required: true
+        type: string
+      CONTENTFUL_ENVIRONMENT:
+        required: true
+        type: string
+    secrets:
+      AWS_ACCESS_KEY_ID:
+        required: true
+      AWS_SECRET_ACCESS_KEY:
+        required: true
+      AWS_REGION:
+        required: true
+      AWS_SESSION_TOKEN:
+        required: true
+      REGISTRY:
+        required: true
+      ECR_REPOSITORY:
+        required: true          
+      SONAR_TOKEN:
+        required: true
+      TOKEN_RELEASE:
+        required: true  
 
 jobs:
   # Analysis:
@@ -63,6 +75,7 @@ jobs:
   #       env:
   #         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
+<<<<<<< HEAD
   # FUNTIONAL_TESTING:
   #   needs:  Analysis
   #   runs-on: ubuntu-latest
@@ -139,12 +152,92 @@ jobs:
   #         body: orders-service v${{github.run_number}}
   #         draft: false
   #         prerelease: false 
+=======
+  FUNTIONAL_TESTING:
+    needs:  Analysis
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.CODE_DIR }}
+    steps:
+      - name: Code checkout 
+        uses: actions/checkout@v4
+
+      - name: test maven
+        run: mvn clean test install
+      
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin' 
+          java-version: '11'
+
+      - name: Correr App
+        run: mvn -X spring-boot:run -Dspring-boot.run.arguments="--APP_ARGS=http://172.17.0.2:8080 http://172.17.0.2:8080 http://172.17.0.2:8080" & sleep 4
+  
+      - name: Instalar Node.js y npm
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar Newman
+        run: |
+              npm install -g newman@latest
+              npm install -g newman-reporter-htmlextra
+
+      - name: Ejecutar pruebas funcionales con Newman
+        run: |
+              newman run.././.github/Postman/collection.json -r cli,htmlextra --reporter-htmlextra-export testArtifacts/htmlreport.html
+      - name: Revisar archivos 
+        run: tree
+                    
+      - name: Almacenar reporte como artefacto
+        uses: actions/upload-artifact@v3
+        with:
+          name: reporte-postman-paymant-service
+          path: ./orders-service/testArtifacts
+
+      - name: Detener la app
+        run: |
+            PID=$(ps aux | grep 'spring-boot:run' | grep -v grep | awk '{print $2}')
+            if [ -n "$PID" ]; then
+                echo "Stopping Spring Boot App with PID $PID"
+                kill -9 $PID
+            else
+                echo "Spring Boot App not running."
+            fi
+  Release:
+#    needs:  FUNTIONAL_TESTING
+    needs: Analysis
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.CODE_DIR }}
+    steps:
+      - name: Code checkout 
+        uses: actions/checkout@v4
+      - name: Build JAR
+        run: mvn install -B
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_RELEASE }}
+        with:
+          tag_name: v${{github.run_number}}-${{ inputs.CI_ENV }}
+          release_name: orders-service-${{ inputs.CI_ENV }}
+          body: orders-service v${{github.run_number}}
+          draft: false
+          prerelease: false 
+>>>>>>> b47151f (Pipeline final)
         
   #     - name: Upload JAR to Release          
   #       uses: actions/upload-release-asset@v1
   #       env:
   #         GITHUB_TOKEN: ${{ secrets.TOKEN_RELEASE }}
   
+<<<<<<< HEAD
   #       with:
   #         upload_url: ${{ steps.create_release.outputs.upload_url }}
   #         asset_path: ${{ env.CODE_DIR }}/target/orders-service-example-0.0.1-SNAPSHOT.jar
@@ -179,3 +272,39 @@ jobs:
                 dockerfile: ./Dockerfile
                 context: ./
           
+=======
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ env.CODE_DIR }}/target/orders-service-example-0.0.1-SNAPSHOT.jar
+          asset_name: orders-service-${{ inputs.CI_ENV }}.jar
+          asset_content_type: application/java-archive
+
+  BUILD_AND_PUBLISH:
+    needs:  Release
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.CODE_DIR }}
+    steps:
+      - name: Code checkout 
+        uses: actions/checkout@v4
+
+      - name: Setup AWS creds
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: upload image to ECR
+        uses: appleboy/docker-ecr-action@master        
+        with:
+          registry: ${{ secrets.REGISTRY }}
+          repo: ${{ secrets.ECR_REPOSITORY }}
+          region: ${{ secrets.AWS_SESSION_TOKEN }}
+          tags: orders-service-v-${{ inputs.CI_ENV }}.v${{ github.run_number }}
+          daemon_off: false
+          dockerfile: ./Dockerfile
+          context: ./               
+>>>>>>> b47151f (Pipeline final)
