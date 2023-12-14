@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   build-prod:
-    uses: CAScompany/project-ShippingService/.github/workflows/orderservice.yml@main
+    uses: CAScompany/project-OrderService/.github/workflows/orderservice.yml@main
     with:
       CI_ENV: producion
       CONTENTFUL_ENVIRONMENT: 'main'

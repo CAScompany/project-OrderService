@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   build-staging:
-    uses: CAScompany/project-ShippingService/.github/workflows/orderservice.yml@test
+    uses: CAScompany/project-OrderService/.github/workflows/orderservice.yml@test
     with:
       CI_ENV: test
       CONTENTFUL_ENVIRONMENT: 'test'
