@@ -31,7 +31,7 @@
             "exec": [
               "pm.test(\"Status code is between 200 and 299\", function () {",
               "    pm.response.to.have.status(200);",
-              "     pm.expect(pm.response.code).to.be.within(200, 299);",
+              
               "})"
             ]
           }
