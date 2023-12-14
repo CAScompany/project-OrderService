@@ -77,7 +77,7 @@ jobs:
   #         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   FUNTIONAL_TESTING:
-#    needs:  Analysis
+##    needs:  Analysis
     runs-on: ubuntu-latest
     defaults:
       run:
