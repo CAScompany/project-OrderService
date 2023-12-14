@@ -25,13 +25,14 @@ on:
         required: true
       TOKEN_RELEASE:
         required: true  
-
+env:
+  CODE_DIR: ./orders-service
 jobs:
   Analysis:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: orders-service
+        working-directory: ${{ env.CODE_DIR }}
 
     steps:
       - name: Code checkout 
