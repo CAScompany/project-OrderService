@@ -272,7 +272,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
           cluster-name: ${{ secrets.EKS_CLUSTER }}
 #          config-files: .github/values/dev.yaml
-          chart-path: ./productcharts
-          namespace: producion
+          chart-path: ./ordercharts
+          namespace: production
           values: appimage=${{secrets.REGISTRY}}/${{secrets.ECR_REPOSITORY}},apptag=order-service-${{ inputs.CI_ENV }}.v${{ github.run_number }}
           name: order-service
